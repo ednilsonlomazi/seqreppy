@@ -1,7 +1,5 @@
-## DnaNR
-
 ## Description
-Dnanrlib is a Python library for DNA Numerical Representations.
+Seqreppy is a Python library for numerical representations of genomic sequences.
 
 ## Instalation
 First, you need to install NumPy 1.16.2 and Matplotlib 3.0.2, which are DnaNR dependencies.
@@ -12,7 +10,7 @@ First of all, make sure that your main Python program is in the same directory (
 I wrote below a simple code that resumed the dnanr core functionalities:
 
 ```
-from dnanr.encoder.repseq import RepSeq # main class with management purpose
+from seqreppy.encoder.repseq import RepSeq # main class with management purpose
 repseq = RepSeq() # instantiate RepSeq
 repseq.set_fasta_file("/directory/of/fasta/file.fasta") # tell where is the file containing the sequences to be encoded
 repseq.set_models("DnaWalk", "CGR") # tell the methods you want to use specifying your signatures 
@@ -42,15 +40,15 @@ Currently, Dnanrlib has 16 numerical representation methods identified by the si
 If you need some graphical visualisation, bellow is some methods you can use additionally to the core functionalities written above:
 
 ```
-repseq.generate_figure(0, "DnaWalk") # 0 0 is the sequence id (appearance in the fasta file) and the next argument is the representation method
-repseq.generate_figure(0, "DnaWalk", save=True) # If you don't wanna see and just save the figure (default saving directory is dnanrlib/results/img)
+repseq.generate_figure(0, "DnaWalk") # 0 is the sequence id (appearance in the fasta file) and the next argument is the representation method
+repseq.generate_figure(0, "DnaWalk", save=True) # If you don't wanna see and just save the figure (default saving directory is seqreppy/results/img)
 repseq.generate_figure(0, "DnaWalk", save=True, fname="file-name.png", dpi=600) # You can specify image properties too
 ```
 
 In cases where you need to save the results to the disk and collect it in the future, execute:
 
 ```
-repseq.save_results("/directory/of/dnawalk/results") # default saving directory is dnanrlib/results/txt/method_signature
+repseq.save_results("/directory/of/dnawalk/results") # default saving directory is seqreppy/results/txt/method_signature
 repseq.get_results({"DnaWalk": "/directory/of/dnawalk/results"})
 ```
 
