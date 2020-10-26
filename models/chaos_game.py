@@ -53,8 +53,8 @@ class IntegerCGR(md.Model):
 
 	def map_icgr(self, char, pos):
 		coordenate = self.get_nucleotide_coordenates(char)
-		self.encoded_sequence[0][pos] = self.encoded_sequence[0][pos-1] + (2**(pos-1))*coordenate[0]
-		self.encoded_sequence[1][pos] = self.encoded_sequence[1][pos-1] + (2**(pos-1))*coordenate[1]
+		self.encoded_sequence[0][pos] = self.encoded_sequence[0][pos-1] + (2**(pos))*coordenate[0]
+		self.encoded_sequence[1][pos] = self.encoded_sequence[1][pos-1] + (2**(pos))*coordenate[1]
 
 	def encode_one(self, raw_sequence):
 	    self.start_encoding(raw_sequence)
