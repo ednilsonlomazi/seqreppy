@@ -64,3 +64,4 @@ class IntegerCGR(md.Model):
 
 		
 
+""" OBSERVATION: IntegerCGR original algorithM returns (X, Y, N), where N is the sequence lenght. But, N is used only for decoding, and here we are foucus only in encoding. Then, i just return (X,Y)"""
