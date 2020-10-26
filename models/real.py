@@ -9,8 +9,8 @@ class Real(md.Model):
 	def __init__(self):
 		self.real_numbers = {'A': -1.5, 'T': 1.5, 'C': 0.5, 'G': -0.5}
 
-	def get_real_numbers(self, base): return self.real_numbers.get(base) 
+	def get_real_numbers(self, base): return self.real_numbers[base] 
 
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_real_numbers, raw_sequence)))	
-		except Exception: raise md.ModelException(0)
+		except Exception as e: raise md.ModelException(type(e).__name__)

@@ -7,8 +7,8 @@ class MolecularMass(md.Model):
 	def __init__(self):
 		self.mms = {'A': 134, 'T': 125, 'C': 110, 'G': 150}
 
-	def get_mass(self, base): return self.mms.get(base) 
+	def get_mass(self, base): return self.mms[base] 
 
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_mass, raw_sequence)))
-		except Exception: raise md.ModelException(0)
+		except Exception as e: raise md.ModelException(type(e).__name__)

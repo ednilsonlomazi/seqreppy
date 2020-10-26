@@ -9,8 +9,8 @@ class Voss(md.Model):
 	def __init__(self):
 		self.bin_indicators = {'A': (1,0,0,0), 'T': (0,1,0,0), 'C': (0,0,1,0), 'G': (0,0,0,1)}
 
-	def get_bin_indicator(self, base): return self.bin_indicators.get(base)
+	def get_bin_indicator(self, base): return self.bin_indicators[base]
 		 		
 	def encode_one(self, raw_sequence):
 		try: return md.np.transpose(md.np.array(tuple(map(self.get_bin_indicator, raw_sequence))))
-		except Exception: raise md.ModelException(0)
+		except Exception as e: raise md.ModelException(type(e).__name__)

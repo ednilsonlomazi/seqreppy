@@ -10,8 +10,8 @@ class PairedNumericMapping(md.Model):
 	def __init__(self):
 		self.pnumbers = {'A': 1, 'T': 1, 'C': -1, 'G': -1}
 
-	def get_pn(self, base): return self.pnumbers.get(base) 
+	def get_pn(self, base): return self.pnumbers[base] 
 		
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_pn, raw_sequence)))
-		except Exception: raise md.ModelException(0)
+		except Exception as e: raise md.ModelException(type(e).__name__)

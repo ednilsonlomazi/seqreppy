@@ -1,9 +1,9 @@
 class ModelException(Exception):
 	"""docstring for ModelException"""
 	
-	exceptions = {0: "Sequence must be a DNA type and complete"}
+	exceptions = {'KeyError': "Sequence is not complete"}
 
-	def __init__(self, exc_id):
-		super(ModelException, self).__init__(self.exceptions.get(exc_id))
+	def __init__(self, error_name):
+		super(ModelException, self).__init__(self.exceptions.get(error_name))
 		
 		

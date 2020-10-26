@@ -15,7 +15,7 @@ class CGR(md.Model):
 		self.encoded_sequence[0][0] = 0.5
 		self.encoded_sequence[1][0] = 0.5 
 			
-	def get_nucleotide_coordenates(self, char): return self.corners.get(char)
+	def get_nucleotide_coordenates(self, char): return self.corners[char]
 
 	def map_cgr(self, char, pos):
 		coordenate = self.get_nucleotide_coordenates(char)
@@ -25,7 +25,7 @@ class CGR(md.Model):
 	def encode_one(self, raw_sequence):
 	    self.start_encoding(raw_sequence)
 	    try: tuple(map(self.map_cgr, raw_sequence, range(1, self.len_seq)))
-	    except Exception: raise md.ModelException(0)
+	    except Exception as e: raise md.ModelException(type(e).__name__)
 	    return self.encoded_sequence
 	 
 
@@ -46,10 +46,10 @@ class IntegerCGR(md.Model):
 			coordenate = self.corners.get(raw_sequence[0])
 			self.encoded_sequence[0][0] = coordenate[0]
 			self.encoded_sequence[1][0] = coordenate[1]
-		except Exception:
-			raise ModelException(0) 
+		except KeyError: raise ModelException(0)
+		except Exception as e: raise e 
 			
-	def get_nucleotide_coordenates(self, char): return self.corners.get(char)
+	def get_nucleotide_coordenates(self, char): return self.corners[char]
 
 	def map_icgr(self, char, pos):
 		coordenate = self.get_nucleotide_coordenates(char)
@@ -59,7 +59,7 @@ class IntegerCGR(md.Model):
 	def encode_one(self, raw_sequence):
 	    self.start_encoding(raw_sequence)
 	    try: tuple(map(self.map_icgr, raw_sequence, range(1, self.len_seq)))
-	    except Exception: raise md.ModelException(0)
+	    except Exception as e: raise md.ModelException(type(e).__name__)
 	    return self.encoded_sequence 
 
 		

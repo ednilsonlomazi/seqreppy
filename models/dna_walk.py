@@ -9,7 +9,7 @@ class DnaWalk(md.Model):
 	def __init__(self):
 		self.base_maps = {'A':1, 'T':-1, 'C':-1, 'G':1}
 
-	def get_value(self, base): return self.base_maps.get(base)
+	def get_value(self, base): return self.base_maps[base]
 	
 	def start_encoding(self, raw_sequence):
 		self.len_raw_seq = len(raw_sequence)
@@ -22,6 +22,6 @@ class DnaWalk(md.Model):
 	def encode_one(self, raw_sequence):
 		self.start_encoding(raw_sequence)
 		try: md.np.array(tuple(map(self.map_dna_walk, raw_sequence, range(1, self.len_raw_seq))))
-		except Exception: raise md.ModelException(0)
+		except Exception as e: raise md.ModelException(type(e).__name__)
 		return self.encoded_sequence
 		

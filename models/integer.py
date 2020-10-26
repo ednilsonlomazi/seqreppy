@@ -9,8 +9,8 @@ class Integer(md.Model):
 	def __init__(self):
 		self.integers = {'A': 2, 'T': 0, 'C': 1, 'G': 3}
 
-	def get_integer_value(self, base): return self.integers.get(base) 
+	def get_integer_value(self, base): return self.integers[base] 
 
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_integer_value, raw_sequence)))
-		except Exception: raise md.ModelException(0)
+		except Exception as e: raise md.ModelException(type(e).__name__)

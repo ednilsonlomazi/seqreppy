@@ -9,8 +9,8 @@ class Eiip(md.Model):
 	def __init__(self):
 		self.eiips = {'A': 0.1260, 'T': 0.1335, 'C': 0.1340, 'G': 0.0806}
 
-	def get_eiip(self, base): return self.eiips.get(base) 
+	def get_eiip(self, base): return self.eiips[base] 
 			
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_eiip, raw_sequence)))
-		except Exception: raise md.ModelException(0)
+		except Exception as e: raise md.ModelException(type(e).__name__)

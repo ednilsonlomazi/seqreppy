@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import Axes3D 
 import numpy as np
 import datetime
 from seqreppy.config import default_results_img
 from seqreppy.view.mplconfig import mplconfig 
-
+from seqreppy.view.view_exception import ViewException
 
 class VisualMaker(object):
 	"""docstring for VisualMaker""" 
@@ -14,7 +14,7 @@ class VisualMaker(object):
 		config = mplconfig.get(model_signature)
 		pltconfig = config.get("pltconfig")
 		plt.clf()
-		plt.plot(seq_encoded, config.get("marker"), **config.get("plotconfig"))
+		plt.plot(seq_encoded, **config.get("plotconfig"))
 		plt.xlabel(pltconfig.get("xlabel"))
 		plt.ylabel(pltconfig.get("ylabel"))
 		plt.ticklabel_format(style='sci', scilimits=(10,1))
@@ -72,21 +72,27 @@ class VisualMaker(object):
 
 	def visualize(self, model_signature, seq_encoded):
 		num_axis_zero = np.ma.size(seq_encoded, axis=0)
-		if seq_encoded.ndim == 1:
-			self.make_1D(seq_encoded, model_signature).show()
-		elif num_axis_zero == 2:
-			self.make_2D(seq_encoded, model_signature).show()
-		elif num_axis_zero == 3:
-			self.make_3D(seq_encoded, model_signature).show()
+		try:
+			if seq_encoded.ndim == 1:
+				self.make_1D(seq_encoded, model_signature).show()
+			elif num_axis_zero == 2:
+				self.make_2D(seq_encoded, model_signature).show()
+			elif num_axis_zero == 3:
+				self.make_3D(seq_encoded, model_signature).show()
+		except OverflowError: raise ViewException(0)
+		except Exception as e: raise e
 
 	def save_figure(self, model_signature, seq_encoded, **img_kargs):
 		self.fname_verify(img_kargs)
 		num_axis_zero = np.ma.size(seq_encoded, axis=0)
-		if seq_encoded.ndim == 1:
-			self.make_1D(seq_encoded, model_signature).savefig(**img_kargs)
-		elif num_axis_zero == 2:
-			self.make_2D(seq_encoded, model_signature).savefig(**img_kargs)
-		elif num_axis_zero == 3:
-			self.make_3D(seq_encoded, model_signature).savefig(**img_kargs)
+		try:
+			if seq_encoded.ndim == 1:
+				self.make_1D(seq_encoded, model_signature).savefig(**img_kargs)
+			elif num_axis_zero == 2:
+				self.make_2D(seq_encoded, model_signature).savefig(**img_kargs)
+			elif num_axis_zero == 3:
+				self.make_3D(seq_encoded, model_signature).savefig(**img_kargs)
+		except OverflowError: raise ViewException(0)
+		except Exception as e: raise e
 			
 		

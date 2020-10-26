@@ -10,11 +10,11 @@ class Binary2B(md.Model):
 	def __init__(self):
 		self.binaries = {'A': bin(0), 'T': bin(1), 'C': bin(3), 'G': bin(2)}
 
-	def get_bin_value(self, base): return self.binaries.get(base) 
+	def get_bin_value(self, base): return self.binaries[base] 
 
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_bin_value, raw_sequence)))
-		except Exception: raise md.ModelException(0)
+		except Exception as e: raise md.ModelException(type(e).__name__)
 
 
 class Binary4B(md.Model):
@@ -26,8 +26,8 @@ class Binary4B(md.Model):
 	def __init__(self):
 		self.binaries = {'A': bin(4), 'T': bin(8), 'C': bin(1), 'G': bin(2)}
 
-	def get_bin_value(self, base): return self.binaries.get(base) 
+	def get_bin_value(self, base): return self.binaries[base] 
 
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_bin_value, raw_sequence)))
-		except Exception: raise md.ModelException(0)
+		except Exception as e: raise md.ModelException(type(e).__name__)
