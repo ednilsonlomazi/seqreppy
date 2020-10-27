@@ -7,7 +7,7 @@ After that, just clone this repository.
 
 ## Usage
 First of all, make sure that your main Python program is in the same directory (folder) as Seqreppy, after the clone step performed previously.
-I wrote below a simple code that resumed the dnanr core functionalities:
+I wrote below a simple code that resumed the Seqreppy core functionalities:
 
 ```
 from seqreppy.encoder.repseq import RepSeq # main class with management purpose
