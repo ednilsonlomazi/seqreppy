@@ -6,7 +6,7 @@ First, you need to install NumPy 1.16.2 and Matplotlib 3.0.2, which are Seqreppy
 After that, just clone this repository.
 
 ## Usage
-First of all, make sure that your main Python program is in the same directory (folder) as dnanr, after the clone step performed previously.
+First of all, make sure that your main Python program is in the same directory (folder) as Seqreppy, after the clone step performed previously.
 I wrote below a simple code that resumed the dnanr core functionalities:
 
 ```
