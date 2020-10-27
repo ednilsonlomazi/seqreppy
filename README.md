@@ -17,7 +17,7 @@ repseq.set_models("DnaWalk", "CGR") # tell the methods you want to use specifyin
 results = repseq.perform_encoding() # encode
 print(results["CGR"]) # results is a dictionary, where the keys are the methods signatures.   
 ```
-Currently, Dnanrlib has 16 numerical representation methods identified by the signatures below:
+Currently, Seqreppy has 16 numerical representation methods identified by the signatures below:
 
 * Atomic
 * CGR
