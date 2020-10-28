@@ -16,7 +16,7 @@ mplconfig = {
 	"PairedNumericMapping": {'pltconfig': {"xlabel": "Frequency", "ylabel": 'Power Spectrum'}, 'plotconfig':{'c': "black", "markersize": 0.3}},
 	"Real": {'pltconfig': {"xlabel": "Frequency", "ylabel": 'Power Spectrum'}, 'plotconfig':{'c': "black", "markersize": 0.3}},
 	"Tetrahedron": {'pltconfig': {"xlabel": "x", "ylabel": 'y', "zlabel": 'z'}, 'plotconfig':{'c': "black", "markersize": 0.3}},
-	"Voss": {"xlabel": 'Frequency', "ylabel": 'Power Spectrum', 'c': "black", "markersize": 0.3},
+	"Voss": {'pltconfig': {"xlabel": "Frequency", "ylabel": 'Power Spectrum'}, 'plotconfig':{'c': "black", "markersize": 0.3}},
 	"Zcurve": {'pltconfig': {"xlabel": "x", "ylabel": 'y', "zlabel": 'z'}, 'plotconfig':{'c': "black", "markersize": 0.3}}	
 }
 

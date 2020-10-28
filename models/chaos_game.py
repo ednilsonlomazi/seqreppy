@@ -46,8 +46,8 @@ class IntegerCGR(md.Model):
 			coordenate = self.corners.get(raw_sequence[0])
 			self.encoded_sequence[0][0] = coordenate[0]
 			self.encoded_sequence[1][0] = coordenate[1]
-		except KeyError: raise ModelException(0)
-		except Exception as e: raise e 
+		except Exception as e: raise md.ModelException(type(e).__name__)
+		
 			
 	def get_nucleotide_coordenates(self, char): return self.corners[char]
 

@@ -60,13 +60,16 @@ class Data(object):
 	def map_fasta_file(self, part):
 		temp = part.split('\n')
 		self.sequences_info.append(temp[0])
-		self.sequences_data.append(''.join(temp[1:]))
+		self.sequences_data.append(''.join(temp[1:]))  
 
 	def read_fasta(self, directory):
 		self.start()
 		with open(directory) as file:
-			try: tuple(map(self.map_fasta_file, file.read().split('>')[1:]))
-			except Exception: raise DataException(2)
+			file_splited = file.read().split('>')[1:] 
+			try:
+				file_splited[0]
+				tuple(map(self.map_fasta_file, file_splited))
+			except Exception as e: raise DataException(type(e).__name__)
 			
 		return self.sequences_data, self.sequences_info
 	 
