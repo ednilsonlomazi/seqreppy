@@ -1,24 +1,24 @@
 from seqreppy.config import default_results_txt, model_signatures
 from seqreppy.data.data import Data
-from seqreppy.view.visual_maker import VisualMaker
-from seqreppy.models.chaos_game import CGR, IntegerCGR
-from seqreppy.models.complex import Complex
-from seqreppy.models.dna_walk import DnaWalk
-from seqreppy.models.yau import Yau
-from seqreppy.models.tetrahedron import Tetrahedron 
-from seqreppy.models.zcurve import Zcurve
-from seqreppy.models.voss import Voss
-from seqreppy.models.atomic import Atomic
-from seqreppy.models.molecular_mass import MolecularMass
-from seqreppy.models.eiip import Eiip
-from seqreppy.models.binary import Binary2B, Binary4B
-from seqreppy.models.paired_numeric_mapping import PairedNumericMapping
-from seqreppy.models.real import Real 
-from seqreppy.models.integer import Integer
-from seqreppy.encoder.encoder_exception import EncoderException
-from seqreppy.gsp.power_spectrum import PowerSpectrum
+from seqreppy.view.view import View
+from seqreppy.model.chaos_game import CGR, IntegerCGR
+from seqreppy.model.complex import Complex
+from seqreppy.model.dna_walk import DnaWalk
+from seqreppy.model.yau import Yau
+from seqreppy.model.tetrahedron import Tetrahedron 
+from seqreppy.model.zcurve import Zcurve
+from seqreppy.model.voss import Voss
+from seqreppy.model.atomic import Atomic
+from seqreppy.model.molecular_mass import MolecularMass
+from seqreppy.model.eiip import Eiip
+from seqreppy.model.binary import Binary2B, Binary4B
+from seqreppy.model.paired_numeric_mapping import PairedNumericMapping
+from seqreppy.model.real import Real 
+from seqreppy.model.integer import Integer
+from seqreppy.encoder.encoder_exception import EncoderExc
+from seqreppy.gsp.gsp import Gsp
   
-class RepSeq(object): 
+class SeqRep(object): 
 
 	def __init__(self):
 		self.data = Data()
@@ -31,17 +31,17 @@ class RepSeq(object):
 		self.data.sequences_data = raw_sequences
  
 	def model_mapping(self, signature):
-		if signature not in model_signatures: raise EncoderException(0, signature)
+		if signature not in model_signatures: raise EncoderExc(0, signature)
 		return eval(''.join([signature, "()"]))
 
 	def set_models(self, *signatures): self.models = tuple(map(self.model_mapping, signatures))
 
 	def perform_power_spectrum(self, dnas_encoded):
 		try:
-			if dnas_encoded[0].ndim == 1: return tuple(map(self.ps.make_power_spectrum, dnas_encoded))
-			else: return tuple(map(self.ps.get_spectral_content, dnas_encoded))	
+			if dnas_encoded[0].ndim == 1: return tuple(map(self.signal_processing.make_power_spectrum, dnas_encoded))
+			else: return tuple(map(self.signal_processing.get_spectral_content, dnas_encoded))	
 		except AttributeError:
-			self.ps = PowerSpectrum()
+			self.signal_processing = Gsp()
 			return self.perform_power_spectrum(dnas_encoded)
 		
 	def map_encoding(self, model): return model.encode_many(self.data.sequences_data)
@@ -71,13 +71,13 @@ class RepSeq(object):
 	
 	def verify_figure(self, model_signature, kargs):
 		try: self.visual_maker
-		except AttributeError: self.visual_maker = VisualMaker()
+		except AttributeError: self.visual_maker = View()
 		if not kargs.get("show") and not kargs.get("save"): kargs["show"] = True    
 
 	def verify_seq_encoded(self, model_signature, seq_id):
 		try: return self.results[model_signature][seq_id]
-		except KeyError as e: raise EncoderException(0, model_signature, type(e).__name__)
-		except IndexError as e: raise EncoderException(0, seq_id, type(e).__name__)
+		except KeyError as e: raise EncoderExc(0, model_signature, type(e).__name__)
+		except IndexError as e: raise EncoderExc(0, seq_id, type(e).__name__)
 		
 	def generate_figure(self, seq_id, model_signature, **kargs):
 		seq_encoded = self.verify_seq_encoded(model_signature, seq_id)
@@ -87,7 +87,7 @@ class RepSeq(object):
 			if kargs.get("save"): self.visual_maker.save_power_spectrum(model_signature, seq_encoded, **kargs)
 		else:
 			if (model_signature == "Voss" or (seq_encoded.ndim == 1 and model_signature != "DnaWalk")):
-				raise EncoderException(1, model_signature)
+				raise EncoderExc(1, model_signature)
 			if kargs.get("show"): self.visual_maker.visualize(model_signature, seq_encoded)
 			if kargs.get("save"): self.visual_maker.save_figure(model_signature, seq_encoded, **kargs) 	
  

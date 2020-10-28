@@ -1,4 +1,4 @@
-import seqreppy.models.model as md
+import seqreppy.model.model as md
 
 class Binary2B(md.Model):
 	""" Ranawana, R. and Palade, V. (2005) “A Neural network based multi-classifier system
@@ -14,7 +14,7 @@ class Binary2B(md.Model):
 
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_bin_value, raw_sequence)))
-		except Exception as e: raise md.ModelException(type(e).__name__)
+		except Exception as e: raise md.ModelExc(type(e).__name__)
 
 
 class Binary4B(md.Model):
@@ -30,4 +30,4 @@ class Binary4B(md.Model):
 
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_bin_value, raw_sequence)))
-		except Exception as e: raise md.ModelException(type(e).__name__)
+		except Exception as e: raise md.ModelExc(type(e).__name__)

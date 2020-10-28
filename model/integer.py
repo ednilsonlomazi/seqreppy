@@ -1,4 +1,4 @@
-import seqreppy.models.model as md
+import seqreppy.model.model as md
 
 class Integer(md.Model):
 	"""
@@ -13,4 +13,4 @@ class Integer(md.Model):
 
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_integer_value, raw_sequence)))
-		except Exception as e: raise md.ModelException(type(e).__name__)
+		except Exception as e: raise md.ModelExc(type(e).__name__)

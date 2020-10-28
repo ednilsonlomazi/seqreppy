@@ -1,6 +1,6 @@
 import numpy as np
 import math
-from seqreppy.models.model_exception import ModelException
+from seqreppy.model.model_exception import ModelExc
 
 class Model(object):
 	"""docstring for Model"""

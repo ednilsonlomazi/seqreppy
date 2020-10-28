@@ -4,10 +4,10 @@ import numpy as np
 import datetime
 from seqreppy.config import default_results_img
 from seqreppy.view.mplconfig import mplconfig 
-from seqreppy.view.view_exception import ViewException
+from seqreppy.view.view_exception import ViewExc
 
-class VisualMaker(object):
-	"""docstring for VisualMaker""" 
+class View(object):
+	"""docstring for View""" 
 
 
 	def make_1D(self, seq_encoded, model_signature):
@@ -79,7 +79,7 @@ class VisualMaker(object):
 				self.make_2D(seq_encoded, model_signature).show()
 			elif num_axis_zero == 3:
 				self.make_3D(seq_encoded, model_signature).show()
-		except OverflowError: raise ViewException(0)
+		except OverflowError: raise ViewExc(0)
 		except Exception as e: raise e
 
 	def save_figure(self, model_signature, seq_encoded, **img_kargs):
@@ -92,7 +92,7 @@ class VisualMaker(object):
 				self.make_2D(seq_encoded, model_signature).savefig(**img_kargs)
 			elif num_axis_zero == 3:
 				self.make_3D(seq_encoded, model_signature).savefig(**img_kargs)
-		except OverflowError: raise ViewException(0)
+		except OverflowError: raise ViewExc(0)
 		except Exception as e: raise e
 			
 		

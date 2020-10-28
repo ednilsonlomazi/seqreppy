@@ -1,4 +1,4 @@
-import seqreppy.models.model as md 
+import seqreppy.model.model as md 
 
 class DnaWalk(md.Model):
 	"""
@@ -22,6 +22,6 @@ class DnaWalk(md.Model):
 	def encode_one(self, raw_sequence):
 		self.start_encoding(raw_sequence)
 		try: md.np.array(tuple(map(self.map_dna_walk, raw_sequence, range(1, self.len_raw_seq))))
-		except Exception as e: raise md.ModelException(type(e).__name__)
+		except Exception as e: raise md.ModelExc(type(e).__name__)
 		return self.encoded_sequence
 		

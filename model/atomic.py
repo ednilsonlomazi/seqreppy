@@ -1,4 +1,4 @@
-import seqreppy.models.model as md
+import seqreppy.model.model as md
 
 class Atomic(md.Model):
 	""" Holden, T., Subramaniam, R., Sullivan, R., Cheung, E., Schneider, C., Tremberger Jr,
@@ -15,4 +15,4 @@ class Atomic(md.Model):
 			
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_atomic_number, raw_sequence)))
-		except Exception as e: raise md.ModelException(type(e).__name__)
+		except Exception as e: raise md.ModelExc(type(e).__name__)

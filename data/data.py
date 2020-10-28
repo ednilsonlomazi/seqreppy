@@ -1,5 +1,5 @@
 import numpy as np
-from seqreppy.data.data_exception import DataException
+from seqreppy.data.data_exception import DataExc
 
 class Data(object): 		 
 
@@ -69,7 +69,7 @@ class Data(object):
 			try:
 				file_splited[0]
 				tuple(map(self.map_fasta_file, file_splited))
-			except Exception as e: raise DataException(type(e).__name__)
+			except Exception as e: raise DataExc(type(e).__name__)
 			
 		return self.sequences_data, self.sequences_info
 	 

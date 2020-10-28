@@ -1,4 +1,4 @@
-import seqreppy.models.model as md
+import seqreppy.model.model as md
 
 class Complex(md.Model):
 	"""D. Anastassiou, “Genomic signal processing,” IEEE Signal Processing
@@ -13,4 +13,4 @@ class Complex(md.Model):
 			
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_complex_number, raw_sequence)), dtype=md.np.complex64)
-		except Exception as e: raise md.ModelException(type(e).__name__)
+		except Exception as e: raise md.ModelExc(type(e).__name__)

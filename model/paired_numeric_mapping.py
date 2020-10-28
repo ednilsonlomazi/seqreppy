@@ -1,4 +1,4 @@
-import seqreppy.models.model as md
+import seqreppy.model.model as md
 
 class PairedNumericMapping(md.Model):
 	""" Akhtar, M., Epps, J., Ambikairajah, E. (2007) “On DNA numerical representations for
@@ -14,4 +14,4 @@ class PairedNumericMapping(md.Model):
 		
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_pn, raw_sequence)))
-		except Exception as e: raise md.ModelException(type(e).__name__)
+		except Exception as e: raise md.ModelExc(type(e).__name__)

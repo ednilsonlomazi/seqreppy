@@ -1,4 +1,4 @@
-import seqreppy.models.model as md
+import seqreppy.model.model as md
 
 class Voss(md.Model):
 	""" Voss, R. F. (1992) “Evolution of Long-range Fractal Correlations and 1/f noise in DNA
@@ -13,4 +13,4 @@ class Voss(md.Model):
 		 		
 	def encode_one(self, raw_sequence):
 		try: return md.np.transpose(md.np.array(tuple(map(self.get_bin_indicator, raw_sequence))))
-		except Exception as e: raise md.ModelException(type(e).__name__)
+		except Exception as e: raise md.ModelExc(type(e).__name__)

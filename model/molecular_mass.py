@@ -1,4 +1,4 @@
-import seqreppy.models.model as md
+import seqreppy.model.model as md
  
 class MolecularMass(md.Model):
 	"""Stanley, H. E., Buldyrev, S. V., Goldberger, A. L., Goldberger, Z. D., Havlin, S., Mantegna, R. N., ... & Simons, M. (1994). Statistical mechanics in biology: how ubiquitous are long-range correlations?. Physica A: Statistical Mechanics and its Applications, 205(1-3), 214-253."""
@@ -11,4 +11,4 @@ class MolecularMass(md.Model):
 
 	def encode_one(self, raw_sequence):
 		try: return md.np.array(tuple(map(self.get_mass, raw_sequence)))
-		except Exception as e: raise md.ModelException(type(e).__name__)
+		except Exception as e: raise md.ModelExc(type(e).__name__)

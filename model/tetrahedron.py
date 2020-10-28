@@ -1,4 +1,4 @@
-import seqreppy.models.model as md
+import seqreppy.model.model as md
 	
 class Tetrahedron(md.Model):
 	"""
@@ -17,7 +17,7 @@ class Tetrahedron(md.Model):
 			return md.np.array(((md.math.sqrt(2)/3)*(2*seq_bin_indicators[1]-seq_bin_indicators[2]-seq_bin_indicators[3]),
 						 	 (md.math.sqrt(6)/3)*(seq_bin_indicators[2]-seq_bin_indicators[3]),
 						 	 (1/3)*(3*seq_bin_indicators[0]-seq_bin_indicators[2]-seq_bin_indicators[3]-seq_bin_indicators[1])))
-		except Exception as e: raise md.ModelException(type(e).__name__)
+		except Exception as e: raise md.ModelExc(type(e).__name__)
 
 
 		
