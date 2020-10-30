@@ -36,6 +36,7 @@ Currently, Seqreppy has 16 numerical representation methods identified by the si
 * Voss
 * Zcurve
 
+if you wanna numerical representations details, you can read [a short summary here](numerical_representations_summary.pdf)
 
 If you need some graphical visualisation, bellow is some methods you can use additionally to the core functionalities written above:
 
