@@ -8,8 +8,8 @@ class Zcurve(md.Model):
 
 	def start_encoding(self, raw_sequence):
 		self.count = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
-		self.len_raw_seq = len(raw_sequence)
-		self.encoded_sequence = md.np.zeros((3, self.len_raw_seq+1))
+		self.len_raw_seq = len(raw_sequence) + 1
+		self.encoded_sequence = md.np.zeros((3, self.len_raw_seq))
 
 	def map_zcurve(self, base, pos):
 		self.count[base] += 1
@@ -20,7 +20,7 @@ class Zcurve(md.Model):
 
 	def encode_one(self, raw_sequence):
 		self.start_encoding(raw_sequence)
-		try: tuple(map(self.map_zcurve, raw_sequence, range(1, self.len_raw_seq+1)))
+		try: tuple(map(self.map_zcurve, raw_sequence, range(1, self.len_raw_seq)))
 		except Exception as e: raise md.ModelExc(type(e).__name__)
 		return self.encoded_sequence
 	

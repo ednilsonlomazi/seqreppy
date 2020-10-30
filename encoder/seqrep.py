@@ -4,7 +4,7 @@ from seqreppy.view.view import View
 from seqreppy.model.chaos_game import CGR, IntegerCGR
 from seqreppy.model.complex import Complex
 from seqreppy.model.dna_walk import DnaWalk
-from seqreppy.model.yau import Yau
+from seqreppy.model.graphical_2d import Liao
 from seqreppy.model.tetrahedron import Tetrahedron 
 from seqreppy.model.zcurve import Zcurve
 from seqreppy.model.voss import Voss
@@ -60,7 +60,8 @@ class SeqRep(object):
 
 	def save_results(self, *directories, **kargs):
 		if not directories: directories = tuple(map(self.map_default_dirs, self.models))
-		else: assert len(directories) == len(self.models)
+		else:
+			if len(directories) != len(self.models): raise EncoderExc(3)
 		self.data.save_results(directories, self.results, **kargs)
 	
 	def get_results(self, model_dir_dict, gsp=False):

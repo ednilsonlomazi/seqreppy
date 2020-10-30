@@ -7,7 +7,7 @@ mplconfig = {
 	"IntegerCGR": {'pltconfig': {"xlabel": "x", "ylabel": 'y'}, 'plotconfig':{'c': "black", "markersize": 0.3}},
 	"Complex": {'pltconfig': {"xlabel": "Frequency", "ylabel": 'Power Spectrum'}, 'plotconfig':{'c': "black", "markersize": 0.5}},
 	"DnaWalk": {'pltconfig': {"xlabel": "Distância Nucleotídica 'L'", "ylabel": 'Dna Walk (L)'}, 'plotconfig':{'c': "black", "markersize": 0.5}},
-	"Yau": {'pltconfig': {"xlabel": "x", "ylabel": 'y'}, 'plotconfig':{'c': "black", "markersize": 0.3}},
+	"Liao": {'pltconfig': {"xlabel": "x", "ylabel": 'y'}, 'plotconfig':{'c': "black", "markersize": 0.3}},
 	"Eiip": {'pltconfig': {"xlabel": "Frequência", "ylabel": 'Power Spectrum'}, 'plotconfig':{'c': "black", "markersize": 0.3}},
 	"Binary2B": {'pltconfig': {"xlabel": "Frequência", "ylabel": 'Power Spectrum'}, 'plotconfig':{'c': "black", "markersize": 0.3}},
 	"Binary4B": {'pltconfig': {"xlabel": "Frequência", "ylabel": 'Power Spectrum'}, 'plotconfig':{'c': "black", "markersize": 0.3}},
