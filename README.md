@@ -23,7 +23,7 @@ Currently, Seqreppy has 16 numerical representation methods identified by the si
 * CGR
 * Complex
 * DnaWalk
-* Yau
+* Liao
 * Eiip
 * Binary2B
 * Binary4B
