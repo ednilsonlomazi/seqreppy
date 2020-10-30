@@ -10,11 +10,11 @@ First of all, make sure that your main Python program is in the same directory (
 I wrote below a simple code that resumed the Seqreppy core functionalities:
 
 ```
-from seqreppy.encoder.repseq import RepSeq # main class with management purpose
-repseq = RepSeq() # instantiate RepSeq
-repseq.set_fasta_file("/directory/of/fasta/file.fasta") # tell where is the file containing the sequences to be encoded
-repseq.set_models("DnaWalk", "CGR") # tell the methods you want to use specifying your signatures 
-results = repseq.perform_encoding() # encode
+from seqreppy.encoder.seqrep import SeqRep # main class with management purpose
+seqrep = SeqRep() # instantiate RepSeq
+seqrep.set_fasta_file("/directory/of/fasta/file.fasta") # tell where is the file containing the sequences to be encoded
+seqrep.set_models("DnaWalk", "CGR") # tell the methods you want to use specifying your signatures 
+results = seqrep.perform_encoding() # encode
 print(results["CGR"]) # results is a dictionary, where the keys are the methods signatures.   
 ```
 Currently, Seqreppy has 16 numerical representation methods identified by the signatures below:
@@ -41,16 +41,16 @@ if you wanna numerical representations details, you can read [a short summary he
 If you need some graphical visualisation, bellow is some methods you can use additionally to the core functionalities written above:
 
 ```
-repseq.generate_figure(0, "DnaWalk") # 0 is the sequence id (appearance in the fasta file) and the next argument is the representation method
-repseq.generate_figure(0, "DnaWalk", save=True) # If you don't wanna see and just save the figure (default saving directory is seqreppy/results/img)
-repseq.generate_figure(0, "DnaWalk", save=True, fname="file-name.png", dpi=600) # You can specify image properties too
+seqrep.generate_figure(0, "DnaWalk") # 0 is the sequence id (appearance in the fasta file) and the next argument is the representation method
+seqrep.generate_figure(0, "DnaWalk", save=True) # If you don't wanna see and just save the figure (default saving directory is seqreppy/results/img)
+seqrep.generate_figure(0, "DnaWalk", save=True, fname="file-name.png", dpi=600) # You can specify image properties too
 ```
 
 In cases where you need to save the results to the disk and collect it in the future, execute:
 
 ```
-repseq.save_results("/directory/of/dnawalk/results") # default saving directory is seqreppy/results/txt/method_signature
-repseq.get_results({"DnaWalk": "/directory/of/dnawalk/results"})
+seqrep.save_results("/directory/of/dnawalk/results") # default saving directory is seqreppy/results/txt/method_signature
+seqrep.get_results({"DnaWalk": "/directory/of/dnawalk/results"})
 ```
 
 ## Contributing
