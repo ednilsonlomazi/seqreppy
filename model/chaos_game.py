@@ -10,7 +10,7 @@ class CGR(md.Model):
 		self.corners = {'A':(0,0), 'T':(1,0),'U':(1,0), 'C':(0,1), 'G':(1,1)}
  
 	def start_encoding(self, raw_sequence):
-		self.len_seq = len(raw_sequence)
+		self.len_seq = len(raw_sequence) + 1
 		self.encoded_sequence = md.np.zeros((2, self.len_seq))
 		self.encoded_sequence[0][0] = 0.5
 		self.encoded_sequence[1][0] = 0.5 
@@ -37,7 +37,7 @@ class IntegerCGR(md.Model):
 		self.corners = {'A':(1,1), 'T':(-1,1), 'U':(-1,1), 'C':(-1,-1), 'G':(1,-1)}
 
 	def start_encoding(self, raw_sequence):
-		self.len_seq = len(raw_sequence)
+		self.len_seq = len(raw_sequence) # N
 		assert self.len_seq <= 1024 # futuramente, criarei uma exceção bonitinha para isso
 		self.encoded_sequence = md.np.zeros((2, self.len_seq))
 		try:
@@ -53,7 +53,7 @@ class IntegerCGR(md.Model):
 
 	def encode_one(self, raw_sequence):
 	    self.start_encoding(raw_sequence)
-	    try: tuple(map(self.map_icgr, raw_sequence, range(1, self.len_seq)))
+	    try: tuple(map(self.map_icgr, raw_sequence[1:], range(1, self.len_seq)))
 	    except Exception as e: raise md.ModelExc(type(e).__name__)
 	    return self.encoded_sequence 
 
