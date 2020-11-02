@@ -7,7 +7,7 @@ class DnaWalk(md.Model):
 	signature = "DnaWalk"
 
 	def __init__(self):
-		self.base_maps = {'A':1, 'T':-1, 'C':-1, 'G':1}
+		self.base_maps = {'A':-1, 'T':1, 'C':1, 'G':-1}
 
 	def get_value(self, base): return self.base_maps[base]
 	
@@ -21,7 +21,7 @@ class DnaWalk(md.Model):
 		
 	def encode_one(self, raw_sequence):
 		self.start_encoding(raw_sequence)
-		try: md.np.array(tuple(map(self.map_dna_walk, raw_sequence, range(1, self.len_raw_seq))))
+		try: md.np.array(tuple(map(self.map_dna_walk, raw_sequence[1:], range(1, self.len_raw_seq))))
 		except Exception as e: raise md.ModelExc(type(e).__name__)
 		return self.encoded_sequence
 		
