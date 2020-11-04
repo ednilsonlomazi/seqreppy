@@ -8,12 +8,12 @@ class Binary2B(md.Model):
 	signature = "Binary2B"
 
 	def __init__(self):
-		self.binaries = {'A': bin(0), 'T': bin(1), 'C': bin(3), 'G': bin(2)}
+		self.binaries = {'A': (0,0), 'T': (0,1), 'C': (1,1), 'G': (1,0)}
 
 	def get_bin_value(self, base): return self.binaries[base] 
 
 	def encode_one(self, raw_sequence):
-		try: return md.np.array(tuple(map(self.get_bin_value, raw_sequence)))
+		try: return md.np.array(tuple(map(self.get_bin_value, raw_sequence))).reshape((2*len(raw_sequence)))
 		except Exception as e: raise md.ModelExc(type(e).__name__)
 
 
@@ -24,10 +24,10 @@ class Binary4B(md.Model):
 	signature = "Binary4B"
 
 	def __init__(self):
-		self.binaries = {'A': bin(4), 'T': bin(8), 'C': bin(1), 'G': bin(2)}
+		self.binaries = {'A': (1,0,0,0), 'T': (0,1,0,0), 'G': (0,0,1,0), 'C': (0,0,0,1)}
 
 	def get_bin_value(self, base): return self.binaries[base] 
 
 	def encode_one(self, raw_sequence):
-		try: return md.np.array(tuple(map(self.get_bin_value, raw_sequence)))
+		try: return md.np.array(tuple(map(self.get_bin_value, raw_sequence))).reshape((4*len(raw_sequence)))
 		except Exception as e: raise md.ModelExc(type(e).__name__)
