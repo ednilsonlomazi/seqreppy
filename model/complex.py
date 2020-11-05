@@ -12,5 +12,5 @@ class Complex(md.Model):
 	def get_complex_number(self, base): return self.complex_numbers[base]
 			
 	def encode_one(self, raw_sequence):
-		try: return md.np.array(tuple(map(self.get_complex_number, raw_sequence)), dtype=md.np.complex64)
+		try: return md.np.array(tuple(map(self.get_complex_number, raw_sequence)), dtype=md.np.complex128)
 		except Exception as e: raise md.ModelExc(type(e).__name__)

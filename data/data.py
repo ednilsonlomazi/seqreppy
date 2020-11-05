@@ -28,9 +28,7 @@ class Data(object):
 
 	def save_results(self, directories, results_dict): tuple(map(self.map_dirs, directories, tuple(results_dict.values())))			
 	
-	def map_axis(self, number): return float(number)
-
-	def map_bins(self, number): return int(number, 2)
+	def map_axis(self, number): return eval(number)
 
 	def map_info_data_split(self, line):
 		if line[0] == '>': self.sequences_info.append(line[:-1])
@@ -41,20 +39,12 @@ class Data(object):
 			else: self.sequences_data.append(np.array(self.sequences_data_temp))
 			self.sequences_data_temp = []
 
-	def map_info_data_bin_split(self, line):
-		if line[0] == '>': self.sequences_info.append(line[:-1])
-		elif line[0] != '\n': self.sequences_data_temp.append(tuple(map(self.map_bins, line[:-1].split(','))))
-		else:
-			if len(self.sequences_data_temp) == 1: 
-				self.sequences_data.append(np.array(self.sequences_data_temp[0]))
-			else: self.sequences_data.append(np.array(self.sequences_data_temp))
-			self.sequences_data_temp = []
-
 	def get_result(self, directory):
 		self.start()
 		with open(directory) as file:
 			try: tuple(map(self.map_info_data_split, file.readlines()))
-			except: tuple(map(self.map_info_data_bin_split, file.readlines()))  
+			except Exception as e: raise DataExc(type(e).__name__)  
+		self.sequences_data = tuple(self.sequences_data)
 		return self.sequences_data
 		
 	def map_fasta_file(self, part):
@@ -70,7 +60,7 @@ class Data(object):
 				file_splited[0]
 				tuple(map(self.map_fasta_file, file_splited))
 			except Exception as e: raise DataExc(type(e).__name__)
-			
+	
 		return self.sequences_data, self.sequences_info
 	 
 	 
