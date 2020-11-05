@@ -105,6 +105,3 @@ class View(object):
 				self.make_3D(seq_encoded, model_signature).savefig(**img_kargs)
 		except Exception as e: raise ViewExc(type(e).__name__)
 	
-"""	def visualize_subplots(self, *args): self.make_subplots(*args).show()
-
-	def save_subplots(self, *args, **img_kargs): self.make_subplots(*args).savefig(**img_kargs)"""
