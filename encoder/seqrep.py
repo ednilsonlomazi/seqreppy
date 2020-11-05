@@ -92,3 +92,11 @@ class SeqRep(object):
 			if kargs.get("show"): self.visual_maker.visualize(model_signature, seq_encoded)
 			if kargs.get("save"): self.visual_maker.save_figure(model_signature, seq_encoded, **kargs) 	
  
+"""# emergencial code for article publication
+def generate_subplots(self, show=True, save=False, type_plots=(2,2), title_plots=('a)', 'b)', 'c)', 'd)'), seq_id=0, **img_kargs):
+try:
+if show: self.view.visualize_subplots(type_plots, title_plots, self.results, seq_id)
+if save: self.view.save_subplots(type_plots, title_plots, self.results, seq_id, **img_kargs)
+except AttributeError:
+self.view = View()
+self.generate_subplots(**img_kargs)"""

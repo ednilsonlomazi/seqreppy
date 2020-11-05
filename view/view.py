@@ -14,7 +14,7 @@ class View(object):
 		config = mplconfig.get(model_signature)
 		pltconfig = config.get("pltconfig")
 		plt.clf()
-		plt.plot(seq_encoded, **config.get("plotconfig"))
+		plt.plot(seq_encoded, config.get("marker"), **config.get("plotconfig"))
 		plt.xlabel(pltconfig.get("xlabel"))
 		plt.ylabel(pltconfig.get("ylabel"))
 		plt.ticklabel_format(style='sci', scilimits=(10,1))
@@ -25,7 +25,7 @@ class View(object):
 		config = mplconfig.get(model_signature)
 		pltconfig = config.get("pltconfig")
 		plt.clf()
-		plt.plot(seq_encoded[0], seq_encoded[1], '.', **config.get("plotconfig"))
+		plt.plot(seq_encoded[0], seq_encoded[1], config.get("marker"), **config.get("plotconfig"))
 		plt.xlabel(pltconfig.get("xlabel"))
 		plt.ylabel(pltconfig.get("ylabel"))
 		plt.ticklabel_format(style='sci', scilimits=(10,1))
@@ -43,11 +43,23 @@ class View(object):
 		ax3d.ticklabel_format(style='sci', scilimits=(10,1))
 		return plt
 
+	def make_subplots(self, type_plots, title_plots, results, seq_id): # emergencial code for article publication
+		fig, axs = plt.subplots(*type_plots, sharex=False, sharey=False)
+		for seq, signature, ax, titile in results.values(), results.keys(), axs, title_plots:
+			num_axis_zero = np.ma.size(seq[seq_id], axis=0)	
+			try:
+				if signature == "DnaWalk": ax = self.make_1D(seq, signature)
+				elif seq.ndim == 1: build_power_spectrum(seq, signature) 
+				elif num_axis_zero == 2: ax = self.make_2D(*seq, signature)
+				ax.set_title(titile)
+			except Exception as e: raise ViewExc(type(e).__name__)
+		return plt
+
 	def build_power_spectrum(self, model_signature, power_spectrum):
 		config = mplconfig.get(model_signature)
 		pltconfig = config.get("pltconfig")
 		plt.clf()
-		plt.plot(power_spectrum[1:], '-', **config.get("plotconfig"))
+		plt.plot(power_spectrum[1:], config.get("marker"), **config.get("plotconfig"))
 		plt.xlabel(pltconfig.get("xlabel"))
 		plt.ylabel(pltconfig.get("ylabel"))
 		plt.ticklabel_format(style='sci', scilimits=(10,1))
@@ -79,8 +91,7 @@ class View(object):
 				self.make_2D(seq_encoded, model_signature).show()
 			elif num_axis_zero == 3:
 				self.make_3D(seq_encoded, model_signature).show()
-		except OverflowError: raise ViewExc(0)
-		except Exception as e: raise e
+		except Exception as e: raise ViewExc(type(e).__name__)
 
 	def save_figure(self, model_signature, seq_encoded, **img_kargs):
 		self.fname_verify(img_kargs)
@@ -92,7 +103,8 @@ class View(object):
 				self.make_2D(seq_encoded, model_signature).savefig(**img_kargs)
 			elif num_axis_zero == 3:
 				self.make_3D(seq_encoded, model_signature).savefig(**img_kargs)
-		except OverflowError: raise ViewExc(0)
-		except Exception as e: raise e
-			
-		
+		except Exception as e: raise ViewExc(type(e).__name__)
+	
+"""	def visualize_subplots(self, *args): self.make_subplots(*args).show()
+
+	def save_subplots(self, *args, **img_kargs): self.make_subplots(*args).savefig(**img_kargs)"""
