@@ -2,7 +2,9 @@ import seqreppy.model.model as md
 
 class Integer(md.Model):
 	"""
-	Cristea, P. D. (2002). Conversion of nucleotides sequences into genomic signals. Journal of cellular and molecular medicine, 6(2), 279-303.
+	P. D. Cristea, “Genetic signal representation and analysis,” in Proc. of
+	Society of Photo-Optical Instrumentation Engineers (SPIE) conference,
+	vol. 4623, January 2002, pp. 77-84.
 	"""
 	signature = "Integer"
 
