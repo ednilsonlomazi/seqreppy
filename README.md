@@ -11,7 +11,7 @@ I wrote below a simple code that resumed the Seqreppy core functionalities:
 
 ```
 from seqreppy.encoder.seqrep import SeqRep # main class with management purpose
-seqrep = SeqRep() # instantiate RepSeq
+seqrep = SeqRep() # instantiate SeqRep
 seqrep.set_fasta_file("/directory/of/fasta/file.fasta") # tell where is the file containing the sequences to be encoded
 seqrep.set_models("DnaWalk", "CGR") # tell the methods you want to use specifying your signatures 
 results = seqrep.perform_encoding() # encode
@@ -54,9 +54,9 @@ seqrep.get_results({"DnaWalk": "/directory/of/dnawalk/results"})
 ```
 
 ## Contributing
-If you have some new method developed by you or that is not present on DnaNR,
+If you have some new method developed by you or that is not present on Seqreppy,
 please, contribute!
-If you see some code that can be writed in a more efficient way, great! Let me know! Remeber, the code is focous on velocity. Because of that, some parts may be a little hard to read.
+If you see some code that can be writed in a more efficient way, great! Let me know! 
 If you saw interpretation erros in methods implementation, please, tell me, and i will make the corrections as soon as possible!
 
 ## Licence and Copyright
