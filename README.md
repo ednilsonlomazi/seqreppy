@@ -2,7 +2,16 @@
 Seqreppy is a Python library for numerical representations of genomic sequences.
 
 ## Instalation
-First, you need to install NumPy 1.16.2 and Matplotlib 3.0.2, which are Seqreppy dependencies.
+Seqreppy has dependencies, which are NumPy and Matplotlib.
+If you are on a Linux Distribution, type on your terminal:
+```
+python -m pip install -U pip
+python -m pip install -U matplotlib
+pip install numpy
+```
+
+If you are on Windows or another OS, I recommend follow the instructions posted on [NumPy](https://numpy.org/install/) and [Matplotlib](https://matplotlib.org/users/installing.html) Web pages.
+
 After that, just clone this repository.
 
 ## Usage
