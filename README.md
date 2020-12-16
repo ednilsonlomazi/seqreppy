@@ -1,9 +1,10 @@
 ## Description
 Seqreppy is a Python library for numerical representations of genomic sequences.
 
+## Installation
+
 ## Usage
-First of all, make sure that your main Python program is in the same directory (folder) as Seqreppy, after the clone step performed previously.
-I wrote below a simple code that resumed the Seqreppy core functionalities:
+I wrote bellow some code examplifying the functionalities of Seqreppy
 
 ```
 from seqreppy.sp import sp # Core Functionalities
@@ -25,7 +26,7 @@ encodings = sp.encode_from_file(("cgr", "icgr"), "/home/ednilson/file.fasta")
 # encodings = sp.encode_from_strings(("cgr", "icgr"), ("ATCCCGA", "CTGGGA")) 
 
 ##-- Using just 1 sequence on memory.
-# encodings = sp.encode_from_strings(("cgr", "icgr"), "ATCCCGA"))
+# encodings = sp.encode_from_strings(("cgr", "icgr"), "ATCCGAATCGA"))
 
 ##-- I have 2 encoding methods, so, 2 destinies
 sp.save_results(encodings, "/dir/cgr.txt", "/dir/icgr.txt")
@@ -43,7 +44,8 @@ z = sp.get_results({"cgr": "/dir/cgr.txt", "icgr": "/dir/icgr.txt"})
 ## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
 ## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
 
-##  - - - - - - - - OPTIONAL MODULES - - - - - - - - ##
+## -- -- -- -- -- -- -- -- -- OPTIONAL MODULES  -- -- -- -- -- -- -- -- ##
+## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
 ## just in case if you want to analyse graphically or
 ## apply some Genomic Signal Processing analysis
 
