@@ -1,30 +1,67 @@
 ## Description
 Seqreppy is a Python library for numerical representations of genomic sequences.
 
-## Instalation
-Seqreppy has dependencies, which are NumPy and Matplotlib.
-If you are on a Linux Distribution, type on your terminal:
-```
-python -m pip install -U pip
-python -m pip install -U matplotlib
-pip install numpy
-```
-
-If you are on Windows or another OS, I recommend follow the instructions posted on [NumPy](https://numpy.org/install/) and [Matplotlib](https://matplotlib.org/users/installing.html) Web pages.
-
-After that, just clone this repository.
-
 ## Usage
 First of all, make sure that your main Python program is in the same directory (folder) as Seqreppy, after the clone step performed previously.
 I wrote below a simple code that resumed the Seqreppy core functionalities:
 
 ```
-from seqreppy.encoder.seqrep import SeqRep # main class with management purpose
-seqrep = SeqRep() # instantiate SeqRep
-seqrep.set_fasta_file("/directory/of/fasta/file.fasta") # tell where is the file containing the sequences to be encoded
-seqrep.set_models("DnaWalk", "CGR") # tell the methods you want to use specifying your signatures 
-results = seqrep.perform_encoding() # encode
-print(results["CGR"]) # results is a dictionary, where the keys are the methods signatures.   
+from seqreppy.sp import sp # Core Functionalities
+from seqreppy.gsp import gso # !-- Optional --! Genomic Signal Processing
+from seqreppy.view import view # !-- Optional --! -> Graphical visualizations
+
+## -- -- -- -- -- -- -- -- Seqreppy Core Functionalities -- -- -- -- -- ##
+## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
+## Seqreppy uses SeqrepC module for do the following core operations
+## SeqrepC is writed in C language
+
+##-- sp.encode_from_file(<methods signatures>, <directory of fasta file>)
+encodings = sp.encode_from_file(("cgr", "icgr"), "/home/ednilson/file.fasta")
+
+##-- Using just one representation method
+# encodings = sp.encode_from_file("cgr", "/home/ednilson/file.fasta")
+
+##-- Using 2 or more sequences on memory.
+# encodings = sp.encode_from_strings(("cgr", "icgr"), ("ATCCCGA", "CTGGGA")) 
+
+##-- Using just 1 sequence on memory.
+# encodings = sp.encode_from_strings(("cgr", "icgr"), "ATCCCGA"))
+
+##-- I have 2 encoding methods, so, 2 destinies
+sp.save_results(encodings, "/dir/cgr.txt", "/dir/icgr.txt")
+
+##-- In case just one encoding method, one destiny
+# sp.save_results(encodings, "/home/ednilson/la")
+
+# sp.get_results receives a dict, in with the keys are the method signatures
+# and the values are the location (directory)
+z = sp.get_results({"cgr": "/dir/cgr.txt", "icgr": "/dir/icgr.txt"})
+
+##-- In case just one encoding method, one location
+# z = sp.get_results({"atomic": "/home/ednilson/la"})
+
+## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
+## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
+
+##  - - - - - - - - OPTIONAL MODULES - - - - - - - - ##
+## just in case if you want to analyse graphically or
+## apply some Genomic Signal Processing analysis
+
+# view.visualize(<method signature>, <sequence>)
+view.visualize("cgr", x["cgr"][0])
+view.visualize("icgr", x["icgr"][0])
+
+# view.save_figure(<method signature>, <sequence>, <kargs>)
+view.save_figure("cgr", x["cgr"][0], dpi=600, fname="file_name.png")
+
+# kargs are not a rule. You can leave it with None.
+view.save_figure("cgr", x["cgr"][0])
+
+z = gsp.apply_gsp(gsp.power_spectrum, z)
+view.visualize_power_spectrum("atomic", z["atomic"][0], start=10000, end=10032) # remember, results are a dict of iterables. each position on iterable is a seq. If inside fasta file there is only on seq, it position is 0
+view.visualize_power_spectrum("molecular_mass", z["molecular_mass"][0], end=int(len(z["molecular_mass"][0])/2))
+##  - - - - - - - - - - - - - - - - - - - - - - - - ##
+   
 ```
 Currently, Seqreppy has 16 numerical representation methods identified by the signatures below:
 
