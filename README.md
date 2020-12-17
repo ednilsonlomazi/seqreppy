@@ -8,8 +8,6 @@ I wrote bellow some code examplifying the functionalities of Seqreppy
 
 ```
 from seqreppy.sp import sp # Core Functionalities
-from seqreppy.gsp import gso # !-- Optional --! Genomic Signal Processing
-from seqreppy.view import view # !-- Optional --! -> Graphical visualizations
 
 ## -- -- -- -- -- -- -- -- Seqreppy Core Functionalities -- -- -- -- -- ##
 ## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
@@ -28,6 +26,14 @@ encodings = sp.encode_from_file(("cgr", "icgr"), "/home/ednilson/file.fasta")
 ##-- Using just 1 sequence on memory.
 # encodings = sp.encode_from_strings(("cgr", "icgr"), "ATCCGAATCGA"))
 
+##--! IMPORTANT NOTE 1 !--##
+##-- Encodings are a dictionary. Each value of it is an iterable
+##-- representing a pool of sequences encoded by the respectivelly
+##-- method signature, corresponding to the keys of dictionary.
+##-- If your file has 3 sequeces, encodings["cgr"][1] get the second
+##-- sequece. If your file has just one sequence, it will be the first: 
+##-- encodings["cgr"][0], following the order of appereance on fasta file.
+
 ##-- I have 2 encoding methods, so, 2 destinies
 sp.save_results(encodings, "/dir/cgr.txt", "/dir/icgr.txt")
 
@@ -44,61 +50,68 @@ z = sp.get_results({"cgr": "/dir/cgr.txt", "icgr": "/dir/icgr.txt"})
 ## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
 ## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
 
-## -- -- -- -- -- -- -- -- -- OPTIONAL MODULES  -- -- -- -- -- -- -- -- ##
-## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
-## just in case if you want to analyse graphically or
-## apply some Genomic Signal Processing analysis
-
-# view.visualize(<method signature>, <sequence>)
-view.visualize("cgr", x["cgr"][0])
-view.visualize("icgr", x["icgr"][0])
-
-# view.save_figure(<method signature>, <sequence>, <kargs>)
-view.save_figure("cgr", x["cgr"][0], dpi=600, fname="file_name.png")
-
-# kargs are not a rule. You can leave it with None.
-view.save_figure("cgr", x["cgr"][0])
-
-z = gsp.apply_gsp(gsp.power_spectrum, z)
-view.visualize_power_spectrum("atomic", z["atomic"][0], start=10000, end=10032) # remember, results are a dict of iterables. each position on iterable is a seq. If inside fasta file there is only on seq, it position is 0
-view.visualize_power_spectrum("molecular_mass", z["molecular_mass"][0], end=int(len(z["molecular_mass"][0])/2))
-##  - - - - - - - - - - - - - - - - - - - - - - - - ##
    
 ```
 Currently, Seqreppy has 16 numerical representation methods identified by the signatures below:
 
-* Atomic
-* CGR
-* Complex
-* DnaWalk
-* Liao
-* Eiip
-* Binary2B
-* Binary4B
-* Integer
-* IntegerCGR
-* MolecularMass
-* PairedNumericMapping
-* Real
-* Tetrahedron
-* Voss
-* Zcurve
+* atomic
+* cgr
+* imaginary
+* dna_walk
+* liao
+* eiip
+* binary2b
+* binary4b
+* integer
+* icgr
+* molecular_mass
+* paired_numeric
+* real
+* tetrahedron
+* voss
+* zcurve
 
 if you wanna numerical representations details, you can read [a short summary here](nr_summary.pdf)
 
 If you need some graphical visualisation, bellow is some methods you can use additionally to the core functionalities written above:
 
 ```
-seqrep.generate_figure(0, "DnaWalk") # 0 is the sequence id (appearance in the fasta file) and the next argument is the representation method
-seqrep.generate_figure(0, "DnaWalk", save=True) # If you don't wanna see and just save the figure (default saving directory is seqreppy/results/img)
-seqrep.generate_figure(0, "DnaWalk", save=True, fname="file-name.png", dpi=600) # You can specify image properties too
-```
+from seqreppy.sp import sp # Core Functionalities
+from seqreppy.gsp import gso # !-- Optional --! Genomic Signal Processing
+from seqreppy.view import view # !-- Optional --! -> Graphical visualizations
 
-In cases where you need to save the results to the disk and collect it in the future, execute:
+## -- -- -- -- -- -- -- -- -- OPTIONAL MODULES  -- -- -- -- -- -- -- -- ##
+## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
+## just in case if you want to analyse graphically or
+## apply some Genomic Signal Processing analysis
 
-```
-seqrep.save_results("/directory/of/dnawalk/results") # default saving directory is seqreppy/results/txt/method_signature
-seqrep.get_results({"DnaWalk": "/directory/of/dnawalk/results"})
+##-- lets get the results saved before
+encodings = sp.get_results({"cgr": "/dir/cgr.txt", "icgr": "/dir/icgr.txt"})
+
+##-- view.visualize(<method signature>, <sequence>)
+view.visualize("cgr", encodings["cgr"][0])
+view.visualize("icgr", encodings["icgr"][0])
+
+##-- view.save_figure(<method signature>, <sequence>, <kargs>)
+view.save_figure("cgr", encodings["cgr"][0], dpi=600, fname="file_name.png")
+
+##-- kargs are not a rule. You can leave it with None.
+view.save_figure("cgr", encodings["cgr"][0])
+
+##-- lets get some encodings for apply gsp analysis
+z = sp.encode_from_file("eiip", "/home/ednilson/file.fasta")
+
+##-- gsp.apply_gsp(<function>, <encodings>)
+z = gsp.apply_gsp(gsp.power_spectrum, z)
+
+##-- view.visualize_power_spectrum(<method signature>, <sequence>, <kargs>) 
+view.visualize_power_spectrum("atomic", z["atomic"][0])
+
+##-- you can specify a range of the power spectrum
+view.visualize_power_spectrum("atomic", z["atomic"][0], start=1, end=100)
+
+## -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ##
+
 ```
 
 ## Contributing
