@@ -3,3 +3,5 @@ __pycache__/
 dist/
 build/
 setup.py
+MANIFEST.in
+seqreppy.egg-info/
