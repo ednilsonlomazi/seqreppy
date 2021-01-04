@@ -23,7 +23,7 @@ sudo python3 setup.py install
 Now, just install Seqreppy library as usual with pip:
 
 ```
-pip install seqreppy
+pip install seqreppy==1.0.0
 ```
 
 
