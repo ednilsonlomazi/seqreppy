@@ -101,7 +101,7 @@ If you need some graphical visualisation, bellow is some methods you can use add
 
 ```
 from seqreppy.sp import sp # Core Functionalities
-from seqreppy.gsp import gso # !-- Optional --! Genomic Signal Processing
+from seqreppy.gsp import gsp # !-- Optional --! Genomic Signal Processing
 from seqreppy.view import view # !-- Optional --! -> Graphical visualizations
 
 ## -- -- -- -- -- -- -- -- -- OPTIONAL MODULES  -- -- -- -- -- -- -- -- ##
@@ -123,7 +123,7 @@ view.save_figure("cgr", encodings["cgr"][0], dpi=600, fname="file_name.png")
 view.save_figure("cgr", encodings["cgr"][0])
 
 ##-- lets get some encodings for apply gsp analysis
-z = sp.encode_from_file("eiip", "/home/ednilson/file.fasta")
+z = sp.encode_from_file("atomic", "/home/ednilson/file.fasta")
 
 ##-- gsp.apply_gsp(<function>, <encodings>)
 z = gsp.apply_gsp(gsp.power_spectrum, z)
