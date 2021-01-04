@@ -97,7 +97,17 @@ Currently, Seqreppy has 16 numerical representation methods identified by the si
 
 if you wanna numerical representations details, you can read [a short summary here](nr_summary.pdf)
 
-If you need some graphical visualisation, bellow is some methods you can use additionally to the core functionalities written above:
+If you need some graphical visualisation, seqreppy has optional packages to do 
+it for you.
+This optional packages has NumPy and Matplotlib as dependencies.
+So, you need to install it:
+
+```
+python -m pip install -U matplotlib
+pip install numpy
+```
+
+I wrote bellow some methods you can use additionally to the core functionalities written above.
 
 ```
 from seqreppy.sp import sp # Core Functionalities
