@@ -23,7 +23,7 @@ sudo python3 setup.py install
 Now, just install Seqreppy library as usual with pip:
 
 ```
-pip install seqreppy==1.0.0
+pip install seqreppy
 ```
 
 
@@ -48,7 +48,7 @@ encodings = sp.encode_from_file(("cgr", "icgr"), "/home/ednilson/file.fasta")
 # encodings = sp.encode_from_strings(("cgr", "icgr"), ("ATCCCGA", "CTGGGA")) 
 
 ##-- Using just 1 sequence on memory.
-# encodings = sp.encode_from_strings(("cgr", "icgr"), "ATCCGAATCGA"))
+# encodings = sp.encode_from_strings(("cgr", "icgr"), ("ATCCGAATCGA",))
 
 ##--! IMPORTANT NOTE 1 !--##
 ##-- Encodings are a dictionary. Each value of it is an iterable
