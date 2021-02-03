@@ -3,28 +3,16 @@ Seqreppy is a Python library for numerical representations of genomic sequences.
 
 ## Installation
 
-First, lets build the Seqreppy Core: SeqrepC.
-
-For this, you will need to install distutils:
-
-```
-sudo apt install python3-distutils
-```
-
-Then you can follow the steps bellow:
-1) Download the code and unzip the content
-2) Go to SeqrepC-1.0.0/seqrepc folder
-3) Run the command bellow:
+Clone this repository or download the code (and unzip the file).
+Go inside the seqreppy directory and
+run the shell script bellow:
 
 ```
-sudo python3 setup.py install
+sudo ./install-seqreppy.sh
 ```
 
-Now, just install Seqreppy library as usual with pip:
-
-```
-pip install seqreppy
-```
+Obs: make sure that script file is executable in your system (use chmod command). I'm assuming that you are on a Linux Distribution. In future i'll
+make available a script for Windows.
 
 
 ## Usage
